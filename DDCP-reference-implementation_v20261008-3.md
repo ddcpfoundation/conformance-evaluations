@@ -1,6 +1,6 @@
 # Evaluation: DDCP reference implementation
 
-DDCP conformance evaluation, v20261008-2. Published by DDCP Foundation Inc under the [evaluation methodology](https://github.com/ddcpfoundation/protocol-governance/blob/main/EVALUATION_METHODOLOGY.md), against the [DDCP conformance criteria](https://github.com/ddcpfoundation/protocol-governance/blob/main/CRITERIA.md). Licensed under CC BY 4.0.
+DDCP conformance evaluation, v20261008-3. Published by DDCP Foundation Inc under the [evaluation methodology](https://github.com/ddcpfoundation/protocol-governance/blob/main/EVALUATION_METHODOLOGY.md), against the [DDCP conformance criteria](https://github.com/ddcpfoundation/protocol-governance/blob/main/CRITERIA.md). Licensed under CC BY 4.0.
 
 File names cited below (SPECIFICATION, LIMITS.md, BUILD_VERIFICATION.md, UPGRADE_PROCEDURE.md) are files of the reference repository at the examined commit.
 
@@ -8,11 +8,11 @@ File names cited below (SPECIFICATION, LIMITS.md, BUILD_VERIFICATION.md, UPGRADE
 
 | | |
 |---|---|
-| Examined | The DDCP reference implementation, as code, at commit [TO CONFIRM at G4: published snapshot commit; examined at development commit `6eea7df3`] of `ddcpfoundation/[TO CONFIRM at G4: reference repository name]`, as it would run in a deployment that carries value |
+| Examined | The DDCP reference implementation, as code, at commit [TO CONFIRM at G4: published snapshot commit; examined at development commit `3e9cf009`, tagged `code-freeze-v20261008-1`] of `ddcpfoundation/[TO CONFIRM at G4: reference repository name]`, as it would run in a deployment that carries value |
 | Chain | Solana, on the Token-2022 program |
 | Not examined | Any currency. No currency has been issued with this code. |
-| Evidence of behavior | The Foundation's devnet demonstration: program `Bn36ThBHETRi1qBGSauPmocKRFfzFGvdvnAn7SAb1Jp`, reference mint `9RTSRMFRCLKHLEzyKcTEypz5R45tPUctNMLir98y1iRa` |
-| On-chain reading | 2026-10-08, 08:32 to 08:34 UTC; devnet slot 508757433, mainnet slot 454492106 |
+| Evidence of behavior | The Foundation's devnet demonstration: program `Bn36ThBHETRi1qBGSauPmocKRFfzFGvdvnAn7SAb1Jp`, reference mint `9RTSRMFRCLKHLEzyKcTEypz5R45tPUctNMLir98y1iRa`. The demonstration runs on devnet's Token-2022 build, which differs from the build deployed on mainnet-beta; the program's test suite passes against both, each pinned by its hash. |
+| On-chain reading | 2026-10-08, 08:32 to 08:34 UTC; devnet slot 508757433, mainnet-beta slot 454492106 |
 | Build verification | The deployed demonstration program's executable hash, `85481bc4143b6fcaaf7b4d8a24c765b94807a7daaea0e6b23c4a93af0e9ad60a`, equals the hash of the examined commit built in the verifiable-build image named in BUILD_VERIFICATION.md. The program's upgrade authority is the Foundation's deploy key `8J6DmzQ8ZFLpAgnELpqtRmbL9ve6AB3nmGhxAG7bcWvR`. |
 | Relationship | The reference implementation is the Foundation's own work. The Foundation examines it here; this evaluation is not independent. No issuer is involved. |
 
@@ -49,7 +49,7 @@ The summary is an index to the results below, not a score.
 - Token-2022 accepts neither a Freeze Authority nor a Permanent Delegate after a mint is initialized, so the program's upgrade authority cannot add them to an existing mint.
 - Holders' transfers are processed by Token-2022, not by this program.
 
-**What bounds it.** The absences hold under the current Token-2022 code. Whoever holds Token-2022's upgrade key could change that code, for every token at once. At the reading, Token-2022's upgrade authority was `AeLmXCbPaQHGWRLr2saFsEVfmMNuKnxRAbWCT9P5twgz` on mainnet and `3URRPr96EV2wuNRgQKwQpuZitHHsVyDUen1eRSvEun9G` on devnet. The chain records the address, not who controls it.
+**What bounds it.** The absences hold under the current Token-2022 code. Whoever holds Token-2022's upgrade key could change that code, for every token at once. At the reading, Token-2022's upgrade authority was `AeLmXCbPaQHGWRLr2saFsEVfmMNuKnxRAbWCT9P5twgz` on mainnet-beta and `3URRPr96EV2wuNRgQKwQpuZitHHsVyDUen1eRSvEun9G` on devnet. The mainnet-beta address has no private key; only a program that derives it can sign for it. Which program, and how many signers it requires, was not examined.
 
 **Evidence.**
 - Source: genesis checks and fixed configuration (SPECIFICATION section 2.1; I-1 checks, error 6011).

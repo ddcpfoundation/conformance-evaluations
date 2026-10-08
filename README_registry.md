@@ -17,7 +17,7 @@ How evaluations are made, what evidence they rest on and when they become stale 
 
 | Evaluation | Object | On-chain reading | Status |
 |---|---|---|---|
-| [DDCP reference implementation, v20261008-2](DDCP-reference-implementation_v20261008-2.md) | The DDCP reference implementation on Solana's Token-2022 program, as code | 2026-10-08 | Current |
+| [DDCP reference implementation, v20261008-3](DDCP-reference-implementation_v20261008-3.md) | The DDCP reference implementation on Solana's Token-2022 program, as code | 2026-10-08 | Current |
 
 An evaluation is never rewritten. A new evaluation of the same object is a new file; a stale one stays here, marked with the date and the reason; an error is corrected by a dated addendum to the same file.
 
