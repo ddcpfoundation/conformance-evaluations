@@ -1,6 +1,6 @@
 # Evaluation: DDCP reference implementation
 
-DDCP conformance evaluation, v20261008-3. Published by DDCP Foundation Inc under the [evaluation methodology](https://github.com/ddcpfoundation/protocol-governance/blob/main/EVALUATION_METHODOLOGY.md), against the [DDCP conformance criteria](https://github.com/ddcpfoundation/protocol-governance/blob/main/CRITERIA.md). Licensed under CC BY 4.0.
+DDCP conformance evaluation, v20261009-1. Published by DDCP Foundation Inc under the [evaluation methodology](https://github.com/ddcpfoundation/protocol-governance/blob/main/EVALUATION_METHODOLOGY.md), version v20261008-3, against the [DDCP conformance criteria](https://github.com/ddcpfoundation/protocol-governance/blob/criteria-v20261008-2/CRITERIA.md). Licensed under CC BY 4.0.
 
 File names cited below (SPECIFICATION, LIMITS.md, BUILD_VERIFICATION.md, UPGRADE_PROCEDURE.md) are files of the reference repository at the examined commit.
 
@@ -8,7 +8,7 @@ File names cited below (SPECIFICATION, LIMITS.md, BUILD_VERIFICATION.md, UPGRADE
 
 | | |
 |---|---|
-| Examined | The DDCP reference implementation, as code, at commit [TO CONFIRM at G4: published snapshot commit; examined at development commit `3e9cf009`, tagged `code-freeze-v20261008-1`] of `ddcpfoundation/[TO CONFIRM at G4: reference repository name]`, as it would run in a deployment that carries value |
+| Examined | The DDCP reference implementation, as code, at commit `12ed92534ea91778b355e33e4356ae578dcea8d4`, tagged `v0.1.0`, of [`ddcpfoundation/ddcp-ddc`](https://github.com/ddcpfoundation/ddcp-ddc), as it would run in a deployment that carries value |
 | Chain | Solana, on the Token-2022 program |
 | Not examined | Any currency. No currency has been issued with this code. |
 | Evidence of behavior | The Foundation's devnet demonstration: program `Bn36ThBHETRi1qBGSauPmocKRFfzFGvdvnAn7SAb1Jp`, reference mint `9RTSRMFRCLKHLEzyKcTEypz5R45tPUctNMLir98y1iRa`. The demonstration runs on devnet's Token-2022 build, which differs from the build deployed on mainnet-beta; the program's test suite passes against both, each pinned by its hash. |
@@ -146,7 +146,7 @@ The code places no constraint on where reserves are held. Dispersion, or the dis
 
 ### 13. Accurate disclosure of capabilities: Delivered
 
-The specification (docs/SPECIFICATION.md) states every capability the program creates over a mint, who can exercise it and under what conditions, and was examined against the source at the examined commit. `ddc state` reads every authority except the withheld-fee decryption key from the chain.
+The specification (docs/SPECIFICATION.md) states every capability the program creates over a mint, who can exercise it and under what conditions, and was examined against the source at the examined commit. `ddc state` reads every authority, and the public half of the withheld-fee decryption key, from the chain.
 
 The code has not had an independent audit. That bears on how far the code can be relied on, not on whether its capabilities are accurately stated, and is recorded in the reference implementation's Known Limits against DDCP.
 
