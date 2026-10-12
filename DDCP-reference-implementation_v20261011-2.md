@@ -1,6 +1,6 @@
 # Evaluation: DDCP reference implementation
 
-DDCP conformance evaluation, v20261009-1. Published by DDCP Foundation Inc under the [evaluation methodology](https://github.com/ddcpfoundation/protocol-governance/blob/main/EVALUATION_METHODOLOGY.md), version v20261008-3, against the [DDCP conformance criteria](https://github.com/ddcpfoundation/protocol-governance/blob/criteria-v20261008-2/CRITERIA.md). Licensed under CC BY 4.0.
+DDCP conformance evaluation, v20261011-2. Published by DDCP Foundation Inc under the [evaluation methodology](https://github.com/ddcpfoundation/protocol-governance/blob/main/EVALUATION_METHODOLOGY.md), version v20261008-3, against the [DDCP conformance criteria](https://github.com/ddcpfoundation/protocol-governance/blob/criteria-v20261008-2/CRITERIA.md). Licensed under CC BY 4.0.
 
 File names cited below (SPECIFICATION, LIMITS.md, BUILD_VERIFICATION.md, UPGRADE_PROCEDURE.md) are files of the reference repository at the examined commit.
 
@@ -49,7 +49,10 @@ The summary is an index to the results below, not a score.
 - Token-2022 accepts neither a Freeze Authority nor a Permanent Delegate after a mint is initialized, so the program's upgrade authority cannot add them to an existing mint.
 - Holders' transfers are processed by Token-2022, not by this program.
 
-**What bounds it.** The absences hold under the current Token-2022 code. Whoever holds Token-2022's upgrade key could change that code, for every token at once. At the reading, Token-2022's upgrade authority was `AeLmXCbPaQHGWRLr2saFsEVfmMNuKnxRAbWCT9P5twgz` on mainnet-beta and `3URRPr96EV2wuNRgQKwQpuZitHHsVyDUen1eRSvEun9G` on devnet. The mainnet-beta address has no private key; only a program that derives it can sign for it. Which program, and how many signers it requires, was not examined.
+**What bounds it.** The absences hold under the current code of two programs this implementation depends on and does not control.
+
+- **Token-2022.** Whoever holds its upgrade authority could change its code, for every token at once, including how existing token accounts behave. At the reading, the upgrade authority was `AeLmXCbPaQHGWRLr2saFsEVfmMNuKnxRAbWCT9P5twgz` on mainnet-beta and `3URRPr96EV2wuNRgQKwQpuZitHHsVyDUen1eRSvEun9G` on devnet. Measured on 2026-10-11: the mainnet-beta address has no private key and is the signing address, at index 1, of the multisig account `BnD53519LK7QM4ERBGvLedZDe1VoTPgtiBkGPWAACiMZ` of the Squads multisig program (v3, `SMPLecH534NA9acpos4G6x7uf3LWbCAwZQE9e8ZekMu`), which requires 4 of its 6 member keys, can change its own members and threshold with the same 4, and has no time lock that was found. The Squads program is immutable. The devnet upgrade authority is one of those six keys. Who holds the member keys was not examined. Token-2022 was deployed on mainnet-beta on 2022-06-01 and upgraded 13 times up to 2026-06-17.
+- **The ZK ElGamal Proof program**, which verifies the proofs behind confidential balances. It is changed by validator software and feature activation, not by Token-2022's upgrade authority. In 2025 two flaws in it were reported, and each was closed with no known exploit, according to the Solana Foundation's post-mortems of 2025-05-02 and 2025-06-25. The first, reported in April, let forged proofs be accepted and was fixed by a validator software patch. The second, reported in June, could drain a holder's confidential balance; Token-2022 was upgraded on 2025-06-11 to disable confidential transfers, and the proof program was disabled from epoch 805. Token-2022 was upgraded again on 2026-06-17; when confidential transfers became available again on mainnet-beta was not established. On 2026-10-11 the proof program was accepting proofs on mainnet-beta. While each flaw was open, value in confidential balances could have been taken without its owner's key.
 
 **Evidence.**
 - Source: genesis checks and fixed configuration (SPECIFICATION section 2.1; I-1 checks, error 6011).
@@ -164,9 +167,9 @@ The specification, section 2, states what the genesis fixes for every mint, what
 
 ## Comparison with the reference implementation's Known Limits against DDCP
 
-The reference implementation publishes its own Known Limits against DDCP (LIMITS.md at the examined commit). This evaluation found no limit that LIMITS.md does not disclose, and LIMITS.md claims none this evaluation does not find.
+The reference implementation publishes its own Known Limits against DDCP (LIMITS.md at the examined commit). LIMITS.md claims no limit this evaluation does not find.
 
-It differs in one point. LIMITS.md lists the absence of an independent audit under criterion 13. This evaluation records criterion 13 as delivered, because the criterion concerns the accuracy of the specification, not its assurance.
+It differs in two points. First, under criterion 1, this evaluation names the ZK ElGamal Proof program as a second dependency and records its 2025 flaws; LIMITS.md names the proof program under criteria 4 and 15 only, and records that it has been disabled in the past for security fixes. Second, LIMITS.md lists the absence of an independent audit under criterion 13; this evaluation records criterion 13 as delivered, because the criterion concerns the accuracy of the specification, not its assurance.
 
 ## When this evaluation becomes stale
 
