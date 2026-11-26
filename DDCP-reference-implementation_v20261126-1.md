@@ -225,3 +225,7 @@ It is stale, and the registry will mark it so, when any of the following occurs:
 - Token-2022 or the ZK ElGamal Proof program changes in a way the reference's Known Limits against DDCP identifies as bounding a criterion;
 - the chain's consensus rules change;
 - the DDCP Evaluation Criteria or the methodology change in a way that affects a result above.
+
+## Addendum, 2026-11-26
+
+The link to the published rationale, in the paragraph after the Object table, points to `rationale/criteria-v20261126-1.md` at the tag `criteria-v20261126-1`. No file exists at that path: the rationale is published at the root of the repository, at [criteria-v20261126-1.md](https://github.com/ddcpfoundation/protocol-governance/blob/criteria-v20261126-1/criteria-v20261126-1.md). The link is corrected here; the original text is not rewritten. No result is affected.
